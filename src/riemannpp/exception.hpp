@@ -49,19 +49,14 @@ namespace riemannpp {
 		int         d_error;
 		std::string d_reason;
 	public:
-		// Default constructor. Will construct the base exception class with
-		// the string error deduced by strerror, and store errno.
-		internal_exception()
-			: exception(strerror(errno))
-			, d_error(errno)
-			, d_reason(strerror(errno)) {}
-
 		// Construct an internal exception with the given reason. Behaves the
 		// same as the default constructor, with the exception being that the
 		// reason string is overridden by the given parameter.
-		internal_exception(const std::string& reason)
-			: exception(strerror(errno))
-			, d_error(errno)
+		internal_exception(int error, std::string const & reason)
+			: exception(
+					reason + ", error: " + strerror(error)
+				)
+			, d_error(error)
 			, d_reason(reason) {}
 
 		// Destructor.

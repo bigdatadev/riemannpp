@@ -61,7 +61,7 @@ void
 event::tag_add(const std::string& tag) {
 	int result = riemann_event_tag_add(d_event.get(), tag.c_str());
 	if (0 != result) {
-		throw internal_exception();
+		throw internal_exception(errno, "failed to add event tag: " + tag);
 	}
 }
 
@@ -75,7 +75,7 @@ void
 event::attribute_add(attribute&& a) {
 	int result = riemann_event_attribute_add(d_event.get(), a.release());
 	if (0 != result) {
-		throw internal_exception();
+		throw internal_exception(errno, "failed to add event attribute");
 	}
 }
 

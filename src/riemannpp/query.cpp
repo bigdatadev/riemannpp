@@ -59,7 +59,7 @@ void
 query::set_string(const std::string& query) {
 	int result = riemann_query_set_string(d_query.get(), query.c_str());
 	if (0 != result) {
-		throw internal_exception();
+		throw internal_exception(errno, "failed to set query string: " + query);
 	}
 }
 

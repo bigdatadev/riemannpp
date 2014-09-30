@@ -6,7 +6,13 @@ AM_CPPFLAGS = -I${top_srcdir}/src ${RIEMANN_CLIENT_CFLAGS}
 
 # Build rules for riemannpp library
 pkginclude_HEADERS = \
-	src/riemannpp/riemannpp.hpp
+	src/riemannpp/riemannpp.hpp \
+	src/riemannpp/exception.hpp \
+        src/riemannpp/attribute.hpp \
+        src/riemannpp/event.hpp     \
+        src/riemannpp/query.hpp     \
+        src/riemannpp/message.hpp   \
+        src/riemannpp/client.hpp
 
 lib_LTLIBRARIES = \
 	src/riemannpp/libriemannpp.la

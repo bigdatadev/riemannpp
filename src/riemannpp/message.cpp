@@ -63,7 +63,7 @@ void
 message::set_event(event& e) {
 	int result = riemann_message_set_events(d_message.get(), e.release(), nullptr);
 	if (0 != result) {
-		throw internal_exception();
+		throw internal_exception(errno, "failed to set event");
 	}
 }
 
@@ -76,7 +76,7 @@ void
 message::set_query(query& q) {
 	int result = riemann_message_set_query(d_message.get(), q.release());
 	if (0 != result) {
-		throw internal_exception();
+		throw internal_exception(errno, "failed to set query");
 	}
 }
 

@@ -60,7 +60,7 @@ attribute::set(const std::string& key, const std::string& value) {
 	int result = riemann_attribute_set(d_attribute.get(), 
 		key.c_str(), value.c_str());
 	if (-1 == result) {
-		throw internal_exception();
+		throw internal_exception(errno, "failed to set attribute for key: " + key + ", with value: " + value);
 	}
 }
 
@@ -68,7 +68,7 @@ void
 attribute::set_key(const std::string& key) {
 	int result = riemann_attribute_set_key(d_attribute.get(), key.c_str());
 	if (-1 == result) {
-		throw internal_exception();
+		throw internal_exception(errno, "failed to set attribute key " + key);
 	}
 }
 
@@ -76,7 +76,7 @@ void
 attribute::set_value(const std::string& value) {
 	int result = riemann_attribute_set_value(d_attribute.get(), value.c_str());
 	if (-1 == result) {
-		throw internal_exception();
+		throw internal_exception(errno, "failed to set attribute value " + value);
 	}
 }
 

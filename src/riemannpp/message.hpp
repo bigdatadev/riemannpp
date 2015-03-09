@@ -39,6 +39,7 @@ namespace riemannpp {
 	// The message class can contain zero or one query, and zero or more events.
 	class message {
 		std::unique_ptr<riemann_message_t> d_message;
+		std::vector<riemann_event_t*>      d_events;
 
 	public:
 		// CONSTRUCTORS

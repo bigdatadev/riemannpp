@@ -61,7 +61,7 @@ message::operator=(message&& m) {
 
 void
 message::set_event(event& e) {
-	int result = riemann_message_set_events(d_message.get(), e.release(), nullptr);
+	int result = riemann_message_append_events(d_message.get(), e.release(), nullptr);
 	if (0 != result) {
 		throw internal_exception();
 	}
@@ -69,6 +69,7 @@ message::set_event(event& e) {
 
 message&
 message::operator<<(event& e) {
+	set_event(e);
 	return (*this);
 }
 

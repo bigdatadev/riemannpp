@@ -29,13 +29,13 @@ AC_PROG_CC
 # Check for a C++ compiler
 AC_PROG_CXX
 
-AC_LANG([C++], [C])
+AC_LANG([C++])
 
 # Check for pkg-config program
 PKG_PROG_PKG_CONFIG
 
 # Check for riemann-client
-PKG_CHECK_MODULES([RIEMANN_CLIENT], [riemann-client >= 0.26])
+PKG_CHECK_MODULES([RIEMANN_CLIENT], [riemann-client >= 1.4.0])
 
 # Checks for existence of coverage tools and define variables for reporting coverage
 AC_CHECK_COVERAGE

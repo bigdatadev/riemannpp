@@ -56,9 +56,13 @@ TEST_CASE("messages can be created and set", "[message]") {
 		REQUIRE((riemann_message_t*)msg2 != nullptr);
 	}
 	SECTION("set event") {
-		riemann::event e;
 		riemann::message msg;
+
+		riemann::event e;
 		msg.set_event(e);
+
+		riemann::event e2;
+		msg.set_event(e2);
 	}
 	SECTION("stream operator set event") {
 		riemann::event e;

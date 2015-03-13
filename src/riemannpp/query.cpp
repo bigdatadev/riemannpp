@@ -35,6 +35,10 @@ query::query(riemann_query_t* q)
 	: d_query(q)
 {}
 
+query::query(const query& q) {
+	*this = q;
+}
+
 query::query(query&& q) {
 	*this = std::move(q);
 }
@@ -50,7 +54,19 @@ query::~query() {
 }
 
 query&
+query::operator=(const query& q) {
+	if (d_query) {
+		riemann_query_free(d_query.release());
+	}
+	d_query.reset(riemann_query_clone(q));
+	return *this;
+}
+
+query&
 query::operator=(query&& q) {
+	if (d_query) {
+		riemann_query_free(d_query.release());
+	}
 	d_query = std::move(q.d_query);
 	return *this;
 }

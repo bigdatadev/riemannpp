@@ -31,6 +31,12 @@ TEST_CASE("messages can be created and set", "[message]") {
 		riemann::message msg;
 		REQUIRE((riemann_message_t*)msg != nullptr);
 	}
+	SECTION("copy constructor") {
+		riemann::message msg;
+		riemann::message msg2(msg);
+		REQUIRE((riemann_message_t*)msg != nullptr);
+		REQUIRE((riemann_message_t*)msg2 != nullptr);
+	}
 	SECTION("move constructor") {
 		riemann::message msg;
 		riemann::message msg2(std::move(msg));
@@ -48,6 +54,12 @@ TEST_CASE("messages can be created and set", "[message]") {
 		riemann::message msg(std::move(q));
 		REQUIRE((riemann_query_t*)q == nullptr);
 		REQUIRE((riemann_message_t*)msg != nullptr);
+	}
+	SECTION("copy assignment operator") {
+		riemann::message msg;
+		riemann::message msg2 = msg;
+		REQUIRE((riemann_message_t*)msg != nullptr);
+		REQUIRE((riemann_message_t*)msg2 != nullptr);
 	}
 	SECTION("move assignment operator") {
 		riemann::message msg;

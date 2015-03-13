@@ -35,6 +35,10 @@ message::message(riemann_message_t* m)
 	: d_message(m)
 {}
 
+message::message(const message& m) {
+	*this = m;
+}
+
 message::message(message&& m) {
 	*this = std::move(m);
 }
@@ -54,7 +58,19 @@ message::~message() {
 }
 
 message&
+message::operator=(const message& m) {
+	if (d_message) {
+		riemann_message_free(d_message.release());
+	}
+	d_message.reset(riemann_message_clone(m));
+	return (*this);
+}
+
+message&
 message::operator=(message&& m) {
+	if (d_message) {
+		riemann_message_free(d_message.release());
+	}
 	d_message = std::move(m.d_message);
 	return (*this);
 }

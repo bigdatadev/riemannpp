@@ -46,6 +46,9 @@ namespace riemannpp {
 		// of the pointer `q`.
 		query(riemann_query_t* q);
 
+		// Copy constructor.
+		query(const query& q);
+
 		// Move constructor.
 		query(query&& q);
 
@@ -57,6 +60,9 @@ namespace riemannpp {
 		// via a call to release, or if the object has not yet been allocated
 		// then the destructor will do nothing.
 		~query();
+
+		// Copy assignment operator.
+		query& operator=(const query& q);
 
 		// Move assignment operator.
 		query& operator=(query&& q);
@@ -81,11 +87,6 @@ namespace riemannpp {
 		// Cast to riemann_query_t* operator. Use this method to get a handle
 		// to the raw pointer.
 		operator riemann_query_t*() const { return d_query.get(); }
-
-	private:
-		// NOT IMPLEMENTED
-		query(const query& q) = delete;
-		query& operator=(const query& q) = delete;
 	};
 
 }

@@ -35,6 +35,10 @@ attribute::attribute(riemann_attribute_t* a)
 	: d_attribute(a)
 {}
 
+attribute::attribute(const attribute& a) {
+	*this = a;
+}
+
 attribute::attribute(attribute&& a) {
 	*this = std::move(a);
 }
@@ -50,7 +54,19 @@ attribute::~attribute() {
 }
 
 attribute&
+attribute::operator=(const attribute& a) {
+	if (d_attribute) {
+		riemann_attribute_free(d_attribute.release());
+	}
+	d_attribute.reset(riemann_attribute_clone(a));
+	return (*this);
+}
+
+attribute&
 attribute::operator=(attribute&& a) {
+	if (d_attribute) {
+		riemann_attribute_free(d_attribute.release());
+	}
 	d_attribute = std::move(a.d_attribute);
 	return (*this);
 }

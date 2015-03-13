@@ -36,6 +36,10 @@ event::event(riemann_event_t* e)
 	: d_event(e)
 {}
 
+event::event(const event& e) {
+	*this = e;
+}
+
 event::event(event&& e) {
 	*this = std::move(e);
 }
@@ -47,7 +51,19 @@ event::~event() {
 }
 
 event&
+event::operator=(const event& e) {
+	if (d_event) {
+		riemann_event_free(d_event.release());
+	}
+	d_event.reset(riemann_event_clone(e));
+	return (*this);
+}
+
+event&
 event::operator=(event&& e) {
+	if (d_event) {
+		riemann_event_free(d_event.release());
+	}
 	d_event = std::move(e.d_event);
 	return (*this);
 }

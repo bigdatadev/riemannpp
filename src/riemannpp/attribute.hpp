@@ -48,6 +48,9 @@ namespace riemannpp {
 		// will assume ownership of the pointer `a`.
 		attribute(riemann_attribute_t* a);
 
+		// Copy constructor.
+		attribute(const attribute& a);
+
 		// Move constructor.
 		attribute(attribute&& a);
 
@@ -59,6 +62,9 @@ namespace riemannpp {
 		// transferred via a call to release, or if the object has not yet been
 		// allocated then the destructor will do nothing.
 		~attribute();
+
+		// Copy assignment operator.
+		attribute& operator=(const attribute& a);
 
 		// Move assignment operator.
 		attribute& operator=(attribute&& a);
@@ -94,11 +100,6 @@ namespace riemannpp {
 		// Cast to riemmann_attribute_t* operator. Use this method to get a
 		// handle to the raw pointer.
 		operator riemann_attribute_t*() const { return d_attribute.get(); }
-
-	private:
-		// NOT IMPLEMENTED
-		attribute(const attribute& a) = delete;
-		attribute& operator=(const attribute& a) = delete;
 	};
 
 }

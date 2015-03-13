@@ -31,6 +31,11 @@ TEST_CASE("queries can be created and set", "[query]") {
 		riemann::query q;
 		REQUIRE((riemann_query_t*)q != nullptr);
 	}
+	SECTION("copy constructor") {
+		riemann::query q1("query");
+		riemann::query q2(q1);
+		REQUIRE((riemann_query_t*)q2 != nullptr);
+	}
 	SECTION("move constructor") {
 		riemann::query q1("query");
 		riemann::query q2(std::move(q1));
@@ -39,6 +44,12 @@ TEST_CASE("queries can be created and set", "[query]") {
 	SECTION("overridden constructor") {
 		riemann::query q("query");
 		REQUIRE((riemann_query_t*)q != nullptr);
+	}
+	SECTION("copy assignment operator") {
+		riemann::query q1("query");
+		riemann::query q2;
+		q2 = q1;
+		REQUIRE((riemann_query_t*)q2 != nullptr);
 	}
 	SECTION("move assignment operator") {
 		riemann::query q1("query");

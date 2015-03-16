@@ -1,5 +1,7 @@
 # riemannpp (C++)
 
+[![Latest release](https://img.shields.io/github/release/bigdatadev/riemannpp.svg?style=flat-square)](https://github.com/bigdatadev/riemannpp/releases/latest)
+
 ## Introduction
 
 C++ client library for [Riemann](https://github.com/aphyr/riemann).

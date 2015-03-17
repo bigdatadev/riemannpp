@@ -51,6 +51,9 @@ namespace riemannpp {
 		// of the pointer `m`.
 		explicit message(riemann_message_t* m);
 
+		// Copy constructor.
+		message(const message& m);
+
 		// Move constructor.
 		message(message&& m);
 
@@ -62,6 +65,9 @@ namespace riemannpp {
 
 		// Destructor.
 		~message();
+
+		// Copy assignment operator.
+		message& operator=(const message& m);
 
 		// Move assignment operator.
 		message& operator=(message&& m);
@@ -104,11 +110,6 @@ namespace riemannpp {
 		// Cast to riemmann_message_t* operator. Use this method to get a
 		// handle to the raw pointer.
 		operator riemann_message_t*() const { return d_message.get(); }
-
-	private:
-		// NOT IMPLEMENTED
-		message(const message& m) = delete;
-		message& operator=(const message& m) = delete;
 	};
 
 }

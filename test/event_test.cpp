@@ -31,10 +31,22 @@ TEST_CASE("events can be created and set", "[event]") {
 		riemann::event event;
 		REQUIRE((riemann_event_t*)event != nullptr);
 	}
+	SECTION("copy constructor") {
+		riemann::event event;
+		riemann::event event2(event);
+		REQUIRE((riemann_event_t*)event != nullptr);
+		REQUIRE((riemann_event_t*)event2 != nullptr);
+	}
 	SECTION("move constructor") {
 		riemann::event event;
 		riemann::event event2(std::move(event));
 		REQUIRE((riemann_event_t*)event == nullptr);
+		REQUIRE((riemann_event_t*)event2 != nullptr);
+	}
+	SECTION("copy assignment operator") {
+		riemann::event event;
+		riemann::event event2 = event;
+		REQUIRE((riemann_event_t*)event != nullptr);
 		REQUIRE((riemann_event_t*)event2 != nullptr);
 	}
 	SECTION("move assignment operator") {

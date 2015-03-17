@@ -31,6 +31,11 @@ TEST_CASE("attributes can be created and set", "[attribute]") {
 		riemann::attribute attrib;
 		REQUIRE((riemann_attribute_t*)attrib != nullptr);
 	}
+	SECTION("copy constructor") {
+		riemann::attribute attrib1;
+		riemann::attribute attrib2(attrib1);
+		REQUIRE((riemann_attribute_t*)attrib2 != nullptr);
+	}
 	SECTION("move constructor") {
 		riemann::attribute attrib1;
 		riemann::attribute attrib2(std::move(attrib1));
@@ -39,6 +44,12 @@ TEST_CASE("attributes can be created and set", "[attribute]") {
 	SECTION("overridden constructor") {
 		riemann::attribute attrib("key", "value");
 		REQUIRE((riemann_attribute_t*)attrib != nullptr);
+	}
+	SECTION("copy assignment operator") {
+		riemann::attribute attrib1("key", "value");
+		riemann::attribute attrib2;
+		attrib2 = attrib1;
+		REQUIRE((riemann_attribute_t*)attrib2 != nullptr);
 	}
 	SECTION("move assignment operator") {
 		riemann::attribute attrib1("key", "value");

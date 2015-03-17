@@ -67,11 +67,17 @@ namespace riemannpp {
 		// of the pointer `e`.
 		event(riemann_event_t* e);
 
+		// Copy constructor.
+		event(const event& e);
+
 		// Move constructor.
 		event(event&& e);
 
 		// Destructor.
 		~event();
+
+		// Copy assignment operator.
+		event& operator=(const event& e);
 
 		// Move assignment operator.
 		event& operator=(event&& e);
@@ -157,11 +163,6 @@ namespace riemannpp {
 		// Cast to riemann_event_t* operator. Use this method to get a
 		// handle to the raw pointer.
 		operator riemann_event_t*() const { return d_event.get(); }
-
-	private:
-		// NOT IMPLEMENTED
-		event(const event& e) = delete;
-		event& operator=(const event& e) = delete;
 	};
 
 	// INLINE FUNCTION DEFINITIONS
